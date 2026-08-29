@@ -152,9 +152,9 @@ local function createDungeonButton(index)
     button.name = button:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     button.name:SetJustifyH("CENTER")
 
-    button.level = button:CreateFontString(nil, "OVERLAY")
+    button.level = button:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     button.level:SetJustifyH("CENTER")
-    button.score = button:CreateFontString(nil, "OVERLAY")
+    button.score = button:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     button.score:SetJustifyH("CENTER")
 
     button:SetScript("OnEnter", showTooltip)

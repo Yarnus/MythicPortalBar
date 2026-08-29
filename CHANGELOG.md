@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 - 2026-08-30
+
+- Fixed an initialization error caused by setting score text before its font was assigned.
+
 ## 0.1.0 - 2026-08-29
 
 - Added a current-season dungeon bar to Premade Groups dungeon search.
