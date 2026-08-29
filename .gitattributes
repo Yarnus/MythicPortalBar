@@ -1,0 +1,6 @@
+/.gitignore export-ignore
+/.gitattributes export-ignore
+/.pkgmeta export-ignore
+/.github export-ignore
+/CONTEXT.md export-ignore
+/README.md export-ignore
