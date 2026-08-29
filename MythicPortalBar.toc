@@ -1,0 +1,15 @@
+## Interface: 120100
+## Title: MythicPortalBar
+## Title-zhCN: 大秘境传送栏
+## Notes: Shows current-season dungeon progress and portals above Premade Groups.
+## Notes-zhCN: 在预创建队伍上方显示当前赛季地下城成绩与传送。
+## Author: Yarnus
+## Version: 0.1.0
+## SavedVariables: MythicPortalBarDB
+## Category: Dungeons & Raids
+## IconTexture: Interface\Icons\Achievement_Dungeon_GloryoftheRaider
+
+Localization.lua
+Data.lua
+Core.lua
+Settings.lua
