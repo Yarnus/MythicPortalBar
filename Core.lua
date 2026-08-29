@@ -134,8 +134,10 @@ end
 
 local function createDungeonButton(index)
     local button = CreateFrame("Button", addonName .. "Dungeon" .. index, addon.bar, "SecureActionButtonTemplate")
-    button:RegisterForClicks("AnyUp")
+    button:RegisterForClicks("LeftButtonUp")
     button:SetAttribute("useOnKeyDown", false)
+    -- Keep the unmodified left click on the secure action path.
+    button:SetAttribute("type1", "spell")
     -- Shift-click is reserved for moving the bar, never for casting.
     button:SetAttribute("shift-type1", ATTRIBUTE_NOOP)
     button:SetAttribute("alt-shift-type1", ATTRIBUTE_NOOP)
@@ -144,7 +146,12 @@ local function createDungeonButton(index)
 
     button.bg = button:CreateTexture(nil, "BACKGROUND")
     button.bg:SetAllPoints()
-    button.bg:SetColorTexture(0.12, 0.12, 0.12, 0.7)
+    button.bg:SetColorTexture(0.035, 0.035, 0.035, 0.92)
+
+    button.highlight = button:CreateTexture(nil, "HIGHLIGHT")
+    button.highlight:SetAllPoints()
+    button.highlight:SetColorTexture(0.8, 0.6, 0.15, 0.16)
+    button.highlight:SetBlendMode("ADD")
 
     button.icon = button:CreateTexture(nil, "ARTWORK")
     button.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
@@ -157,8 +164,14 @@ local function createDungeonButton(index)
     button.score = button:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     button.score:SetJustifyH("CENTER")
 
-    button:SetScript("OnEnter", showTooltip)
-    button:SetScript("OnLeave", GameTooltip_Hide)
+    button:SetScript("OnEnter", function(self)
+        self.highlight:Show()
+        showTooltip(self)
+    end)
+    button:SetScript("OnLeave", function(self)
+        self.highlight:Hide()
+        GameTooltip_Hide()
+    end)
     button:SetScript("OnMouseDown", function(_, mouseButton)
         if mouseButton == "LeftButton" and IsShiftKeyDown() then
             beginDrag()
@@ -180,7 +193,14 @@ local function configureSecureAction(button, dungeon)
     end
     if dungeon.portalKnown then
         button:SetAttribute("type1", "spell")
-        button:SetAttribute("spell1", dungeon.spellID)
+        local spellName
+        if C_Spell.GetSpellName then
+            spellName = C_Spell.GetSpellName(dungeon.spellID)
+        end
+        if not spellName and GetSpellInfo then
+            spellName = GetSpellInfo(dungeon.spellID)
+        end
+        button:SetAttribute("spell1", spellName or dungeon.spellID)
     else
         button:SetAttribute("type1", nil)
         button:SetAttribute("spell1", nil)
@@ -246,7 +266,8 @@ local function applyDungeon(button, dungeon)
     button.name:SetTextColor(dungeon.portalKnown and 1 or 0.5, dungeon.portalKnown and 0.82 or 0.5, dungeon.portalKnown and 0 or 0.5)
     button.level:SetAlpha(dungeon.portalKnown and 1 or 0.45)
     button.score:SetAlpha(dungeon.portalKnown and 1 or 0.45)
-    button.bg:SetColorTexture(0.12, 0.12, 0.12, dungeon.portalKnown and 0.7 or 0.35)
+    button.bg:SetColorTexture(0.035, 0.035, 0.035, dungeon.portalKnown and 0.92 or 0.52)
+    button.highlight:SetShown(false)
     configureSecureAction(button, dungeon)
     button:Show()
 end
@@ -275,25 +296,16 @@ local function createBar()
     bar:SetFrameStrata("HIGH")
     bar:SetClampedToScreen(true)
     bar:SetMovable(true)
-    bar:EnableMouse(true)
+    -- Only dungeon buttons need mouse input. Keeping the container transparent
+    -- prevents its empty area from covering the Group Finder drag region.
+    bar:EnableMouse(false)
     bar:SetBackdrop({
         bgFile = "Interface\\Buttons\\WHITE8X8",
         edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
         edgeSize = 12,
         insets = { left = 3, right = 3, top = 3, bottom = 3 },
     })
-    bar:SetBackdropBorderColor(0.55, 0.47, 0.25, 0.9)
-    bar:SetScript("OnMouseDown", function(_, mouseButton)
-        if mouseButton == "LeftButton" and IsShiftKeyDown() then
-            beginDrag()
-        end
-    end)
-    bar:SetScript("OnMouseUp", function(_, mouseButton)
-        if mouseButton == "LeftButton" then
-            endDrag()
-        end
-    end)
-
+    bar:SetBackdropBorderColor(0.25, 0.2, 0.12, 0.85)
     bar.unavailable = bar:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     addon.unavailable = bar.unavailable
     bar.unavailable:SetPoint("CENTER")

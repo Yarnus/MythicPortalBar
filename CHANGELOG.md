@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2 - 2026-08-30
+
+- Fixed learned portal buttons not triggering their secure teleport action.
+- Fixed the bar's empty container area blocking Group Finder window dragging.
+- Added native-style dungeon item hover highlighting.
+
 ## 0.1.1 - 2026-08-30
 
 - Fixed an initialization error caused by setting score text before its font was assigned.

@@ -4,7 +4,7 @@
 ## Notes: Shows current-season dungeon progress and portals above Premade Groups.
 ## Notes-zhCN: 在预创建队伍上方显示当前赛季地下城成绩与传送。
 ## Author: Yarnus
-## Version: 0.1.1
+## Version: 0.1.2
 ## X-Website: https://github.com/Yarnus/MythicPortalBar
 ## X-Source: https://github.com/Yarnus/MythicPortalBar
 ## X-License: MIT
