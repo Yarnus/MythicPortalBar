@@ -54,7 +54,6 @@ local function registerSettings()
 
     addSetting(category, "SCALE", "scale", Settings.VarType.Number, L.SCALE, 1, "slider", sliderOptions(0.5, 2, 0.05), L.SCALE_TOOLTIP)
     addSetting(category, "BACKGROUND_ALPHA", "backgroundAlpha", Settings.VarType.Number, L.BACKGROUND_ALPHA, 0.82, "slider", sliderOptions(0, 1, 0.05), L.BACKGROUND_ALPHA_TOOLTIP)
-    addSetting(category, "ICON_SIZE", "iconSize", Settings.VarType.Number, L.ICON_SIZE, 34, "slider", sliderOptions(24, 52, 1), L.ICON_SIZE_TOOLTIP)
     addSetting(category, "SPACING", "spacing", Settings.VarType.Number, L.SPACING, 4, "slider", sliderOptions(0, 16, 1), L.SPACING_TOOLTIP)
     addSetting(category, "LOCKED", "locked", Settings.VarType.Boolean, L.LOCK_POSITION, false, "checkbox", nil, L.LOCK_POSITION_TOOLTIP)
     addSetting(category, "FONT", "font", Settings.VarType.String, L.FONT, "default", "dropdown", dropdownOptions({
@@ -62,7 +61,7 @@ local function registerSettings()
         { value = "chat", label = L.FONT_CHAT },
         { value = "damage", label = L.FONT_DAMAGE },
     }), L.FONT_TOOLTIP)
-    addSetting(category, "FONT_SIZE", "fontSize", Settings.VarType.Number, L.FONT_SIZE, 12, "slider", sliderOptions(9, 20, 1), L.FONT_SIZE_TOOLTIP)
+    addSetting(category, "FONT_SIZE", "fontSize", Settings.VarType.Number, L.FONT_SIZE, 11, "slider", sliderOptions(9, 14, 1), L.FONT_SIZE_TOOLTIP)
     addSetting(category, "FONT_OUTLINE", "fontOutline", Settings.VarType.String, L.FONT_OUTLINE, "OUTLINE", "dropdown", dropdownOptions({
         { value = "", label = L.OUTLINE_NONE },
         { value = "OUTLINE", label = L.OUTLINE_NORMAL },

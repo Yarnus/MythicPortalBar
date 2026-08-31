@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.4 - 2026-08-31
+
+- Redesigned dungeon items as compact 96x56 image cards.
+- Added overlaid dungeon names, level badges, lock indicators, and hover borders.
+- Limited name and level typography to a readable 9-14px range.
+
 ## 0.1.3 - 2026-08-31
 
 - Fixed dungeon labels to use the names from the dungeon search activities.
