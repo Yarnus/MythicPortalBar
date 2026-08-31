@@ -4,9 +4,9 @@ MythicPortalBar is a lightweight Retail World of Warcraft addon that adds a curr
 
 Each dungeon item shows:
 
-- The dungeon icon and localized abbreviation
+- The dungeon icon and localized dungeon name
 - The character's highest completed keystone level
-- The character's Blizzard dungeon score
+- The character's Blizzard dungeon score on hover
 - Whether the character has learned the dungeon portal
 
 Click a learned portal to teleport. Unlearned or unmapped portals are greyed out. Hold Shift and left-drag to move the bar.

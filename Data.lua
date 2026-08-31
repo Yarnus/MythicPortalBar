@@ -12,44 +12,15 @@ addon.portalSpells = {
     [588] = { 1286812 }, -- Altar of Fangs
 }
 
--- Curated abbreviations are optional; unknown dungeons use a compact name fallback.
-addon.shortNames = {
-    enUS = {
-        [249] = "KR",
-        [250] = "TOS",
-        [399] = "RLP",
-        [584] = "BV",
-        [585] = "VA",
-        [586] = "DON",
-        [587] = "MR",
-        [588] = "AOF",
-    },
-    zhCN = {
-        [249] = "诸王",
-        [250] = "神庙",
-        [399] = "红玉",
-        [584] = "盲谷",
-        [585] = "虚痕",
-        [586] = "纳洛拉克",
-        [587] = "谋杀街",
-        [588] = "尖牙祭坛",
-    },
-}
-
-local function makeShortName(name)
-    local initials = ""
-    for word in name:gmatch("[%w']+") do
-        initials = initials .. word:sub(1, 1):upper()
+function addon:GetDungeonName(challengeMapID, fallbackName)
+    local activities = C_LFGList.GetAvailableActivities(GROUP_FINDER_CATEGORY_ID_DUNGEONS)
+    for _, activityID in ipairs(activities or {}) do
+        local activity = C_LFGList.GetActivityInfoTable(activityID)
+        if activity and activity.mapID == challengeMapID and activity.isMythicPlusActivity then
+            return activity.fullName or activity.name or fallbackName
+        end
     end
-    if #initials >= 2 then
-        return initials:sub(1, 4)
-    end
-    return name:sub(1, 6)
-end
-
-function addon:GetShortName(challengeMapID, name)
-    local locale = GetLocale() == "zhCN" and "zhCN" or "enUS"
-    return self.shortNames[locale][challengeMapID] or makeShortName(name)
+    return fallbackName
 end
 
 function addon:GetKnownPortalSpell(challengeMapID)
@@ -92,8 +63,7 @@ function addon:GetSeasonDungeons()
         local spellID, portalKnown = self:GetKnownPortalSpell(challengeMapID)
         dungeons[#dungeons + 1] = {
             challengeMapID = challengeMapID,
-            name = name,
-            shortName = self:GetShortName(challengeMapID, name),
+            name = self:GetDungeonName(challengeMapID, name),
             texture = texture or 134400,
             level = level,
             score = score or 0,

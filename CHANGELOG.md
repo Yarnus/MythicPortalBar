@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3 - 2026-08-31
+
+- Fixed dungeon labels to use the names from the dungeon search activities.
+- Changed dungeon items to show the full name and highest level, with the score shown on hover.
+- Removed the obsolete abbreviation display setting.
+
 ## 0.1.2 - 2026-08-30
 
 - Fixed learned portal buttons not triggering their secure teleport action.

@@ -6,7 +6,6 @@ addon.defaults = {
     backgroundAlpha = 0.82,
     iconSize = 34,
     spacing = 4,
-    showShortName = true,
     locked = false,
     font = "default",
     fontSize = 12,
@@ -161,9 +160,6 @@ local function createDungeonButton(index)
 
     button.level = button:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     button.level:SetJustifyH("CENTER")
-    button.score = button:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    button.score:SetJustifyH("CENTER")
-
     button:SetScript("OnEnter", function(self)
         self.highlight:Show()
         showTooltip(self)
@@ -216,19 +212,16 @@ function addon:ApplyAppearance()
 
     for _, button in ipairs(buttons) do
         button.icon:SetSize(db.iconSize, db.iconSize)
-        button.name:SetShown(db.showShortName)
         button.level:SetFont(font, db.fontSize, db.fontOutline)
-        button.score:SetFont(font, db.fontSize, db.fontOutline)
         button.level:SetTextColor(color.r, color.g, color.b)
-        button.score:SetTextColor(color.r, color.g, color.b)
     end
     self:Layout()
 end
 
 function addon:Layout()
     local db = MythicPortalBarDB
-    local itemWidth = math.max(db.iconSize + 8, 62)
-    local itemHeight = db.iconSize + (db.showShortName and 18 or 6)
+    local itemWidth = math.max(db.iconSize + 8, 96)
+    local itemHeight = db.iconSize + 18
     local visible = 0
 
     for _, button in ipairs(buttons) do
@@ -238,14 +231,12 @@ function addon:Layout()
             button:SetPoint("LEFT", self.bar, "LEFT", 8 + (visible - 1) * (itemWidth + db.spacing), 0)
             button:SetSize(itemWidth, itemHeight)
             button.icon:ClearAllPoints()
-            button.icon:SetPoint("LEFT", button, "LEFT", 4, db.showShortName and 6 or 0)
+            button.icon:SetPoint("LEFT", button, "LEFT", 4, 6)
             button.name:ClearAllPoints()
             button.name:SetPoint("TOP", button.icon, "BOTTOM", 0, -1)
             button.name:SetWidth(itemWidth)
             button.level:ClearAllPoints()
             button.level:SetPoint("BOTTOMLEFT", button.icon, "BOTTOMRIGHT", 3, 3)
-            button.score:ClearAllPoints()
-            button.score:SetPoint("TOPLEFT", button.icon, "TOPRIGHT", 3, -3)
         end
     end
 
@@ -259,13 +250,11 @@ end
 local function applyDungeon(button, dungeon)
     button.dungeon = dungeon
     button.icon:SetTexture(dungeon.texture)
-    button.name:SetText(dungeon.shortName)
+    button.name:SetText(dungeon.name)
     button.level:SetText(dungeon.level)
-    button.score:SetText(dungeon.score)
     button.icon:SetDesaturated(not dungeon.portalKnown)
     button.name:SetTextColor(dungeon.portalKnown and 1 or 0.5, dungeon.portalKnown and 0.82 or 0.5, dungeon.portalKnown and 0 or 0.5)
     button.level:SetAlpha(dungeon.portalKnown and 1 or 0.45)
-    button.score:SetAlpha(dungeon.portalKnown and 1 or 0.45)
     button.bg:SetColorTexture(0.035, 0.035, 0.035, dungeon.portalKnown and 0.92 or 0.52)
     button.highlight:SetShown(false)
     configureSecureAction(button, dungeon)

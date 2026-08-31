@@ -20,8 +20,6 @@ local L = {
     ICON_SIZE_TOOLTIP = "Adjust dungeon icon size.",
     SPACING = "Item spacing",
     SPACING_TOOLTIP = "Adjust the space between dungeon items.",
-    SHOW_SHORT_NAME = "Show abbreviations",
-    SHOW_SHORT_NAME_TOOLTIP = "Show a short dungeon name below each icon.",
     LOCK_POSITION = "Lock position",
     LOCK_POSITION_TOOLTIP = "Prevent Shift + left-drag from moving the bar.",
     FONT = "Font",
@@ -69,8 +67,6 @@ if GetLocale() == "zhCN" then
     L.ICON_SIZE_TOOLTIP = "调整地下城图标尺寸。"
     L.SPACING = "项目间距"
     L.SPACING_TOOLTIP = "调整地下城项目之间的距离。"
-    L.SHOW_SHORT_NAME = "显示简称"
-    L.SHOW_SHORT_NAME_TOOLTIP = "在图标下方显示地下城简称。"
     L.LOCK_POSITION = "锁定位置"
     L.LOCK_POSITION_TOOLTIP = "禁止使用 Shift + 左键拖动传送栏。"
     L.FONT = "字体"

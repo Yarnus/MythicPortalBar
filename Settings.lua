@@ -56,7 +56,6 @@ local function registerSettings()
     addSetting(category, "BACKGROUND_ALPHA", "backgroundAlpha", Settings.VarType.Number, L.BACKGROUND_ALPHA, 0.82, "slider", sliderOptions(0, 1, 0.05), L.BACKGROUND_ALPHA_TOOLTIP)
     addSetting(category, "ICON_SIZE", "iconSize", Settings.VarType.Number, L.ICON_SIZE, 34, "slider", sliderOptions(24, 52, 1), L.ICON_SIZE_TOOLTIP)
     addSetting(category, "SPACING", "spacing", Settings.VarType.Number, L.SPACING, 4, "slider", sliderOptions(0, 16, 1), L.SPACING_TOOLTIP)
-    addSetting(category, "SHOW_SHORT_NAME", "showShortName", Settings.VarType.Boolean, L.SHOW_SHORT_NAME, true, "checkbox", nil, L.SHOW_SHORT_NAME_TOOLTIP)
     addSetting(category, "LOCKED", "locked", Settings.VarType.Boolean, L.LOCK_POSITION, false, "checkbox", nil, L.LOCK_POSITION_TOOLTIP)
     addSetting(category, "FONT", "font", Settings.VarType.String, L.FONT, "default", "dropdown", dropdownOptions({
         { value = "default", label = L.FONT_DEFAULT },
